@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Result</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/assets/css/main.css" rel="stylesheet">
+
+    <!-- Inline CSS for better spacing -->
+    <style>
+        .podcast-content {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            line-height: 1.2;
+            white-space: pre-wrap;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .podcast-content strong {
+            font-weight: 500;
+        }
+        .podcast-content p {
+            margin-bottom: 1.5rem;
+        }
+
+    
+        /* Center the h2 and align the button to the right */
+        .section-title {
+            display: flex;
+            justify-content: space-between; /* Space between title and button */
+            align-items: center; /* Aligns items vertically */
+            padding: 20px 0; /* Added padding for spacing */
+        }
+        .section-title h2 {
+            flex-grow: 1; /* Allow h2 to take up available space */
+            text-align: center; /* Center the h2 text */
+            margin: 0; /* Remove default margin */
+        }
+        .download-button {
+            margin-left: auto; /* Push button to the right */
+        }
+
+        hr {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+    </style>
+</head>
+<body class="result-page">
+    <header id="header" class="header d-flex align-items-center light-background sticky-top">
+        <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+            <a href="{{ url_for('index') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+                <h1 class="sitename">Podcast Generator</h1>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('services') }}">Podcast Generator</a></li>
+                    <li><a href="{{ url_for('result') }}">Result</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section id="result" class="result section">
+            <div class="container section-title">
+                <h2>Generated Podcast Conversation</h2>
+                <form action="{{ url_for('download_pdf') }}" method="get" class="download-button">
+                    <!-- <input type="hidden" name="podcast_script" value="{{ podcast_script | safe }}"> -->
+                    <button type="submit" class="btn btn-primary">Download as PDF</button>
+                </form>
+            </div>
+            
+            <!-- Add horizontal rule below the title and download button for separation -->
+            <hr style="border-top: 1px solid #ccc; margin: 20px 0;">
+            
+            <div class="container">
+                <div class="podcast-content">
+                    <div>
+                        {{ podcast_script | safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/js/main.js"></script>
+
+    <footer id="footer" class="footer light-background">
+        <div class="container text-center">
+            <p>&copy; Copyright All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
